@@ -16,7 +16,7 @@ jobs:
     - name: make
       run: cd pipe && make
     - name: run
-      run: cd pipe && ./server.out & ./client.out
+      run: cd pipe && ./server.out & cd pipe && ./client.out
 
   buildWindows_PipeProject:
   
@@ -27,4 +27,4 @@ jobs:
       - name: make
         run: cd pipe && make
       - name: run
-        run: cd pipe && ./server.out & ./client.out
+        run: cd pipe && ./server.out & cd pipe && ./client.out

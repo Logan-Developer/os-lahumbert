@@ -29,9 +29,9 @@ int main() {
     // Pipe Creation (Conditional)
     #ifdef _WIN32 
         // Create the named pipes
-        read_handle = CreateNamedPipe(
+        write_handle = CreateNamedPipe(
             PIPE1,                 // Pipe name
-            PIPE_ACCESS_INBOUND,   // Read access
+            PIPE_ACCESS_OUTBOUND,  // Write access
             PIPE_TYPE_MESSAGE,     // Message-type pipe
             1,                     // Only one instance
             1024,                  // Outbound buffer size
@@ -39,14 +39,15 @@ int main() {
             0,                     // Default timeout
             NULL                   // Default security attributes
         );
-        if (read_handle == INVALID_HANDLE_VALUE) {
-            _tprintf(_T("Error creating inbound pipe: %ld\n"), GetLastError());
+        if (write_handle == INVALID_HANDLE_VALUE) {
+            _tprintf(_T("Error creating outbound pipe: %ld\n"), GetLastError());
+            closeHandle(write_handle);
             return 1;
         }
 
-        write_handle = CreateNamedPipe(
+        read_handle = CreateNamedPipe(
             PIPE2,
-            PIPE_ACCESS_OUTBOUND, 
+            PIPE_ACCESS_INBOUND, 
             PIPE_TYPE_MESSAGE,
             1, 
             1024, 
@@ -54,8 +55,8 @@ int main() {
             0,
             NULL 
         );
-        if (write_handle == INVALID_HANDLE_VALUE) {
-            _tprintf(_T("Error creating outbound pipe: %ld\n"), GetLastError());
+        if (read_handle == INVALID_HANDLE_VALUE) {
+            _tprintf(_T("Error creating inbound pipe: %ld\n"), GetLastError());
             CloseHandle(read_handle);
             return 1;
         }
@@ -68,8 +69,8 @@ int main() {
     #ifdef _WIN32
          // ... (Windows code for connecting to named pipes)
     #else
-        read_fd = open(FIFO1, O_RDONLY);  // Open client-to-server pipe for reading
-        write_fd = open(FIFO2, O_WRONLY); // Open server-to-client pipe for writing
+        write_fd = open(FIFO1, O_WRONLY); // Open client-to-server pipe for writing
+        read_fd = open(FIFO2, O_RDONLY); // Open server-to-client pipe for reading
     #endif
 
     //  Communication logic (Keep this mostly platform-independent) 
@@ -88,6 +89,13 @@ int main() {
         write(write_fd, msg, strlen(msg) + 1);
     #endif
     printf("Client sent: %s\n", msg);
+
+    #ifdef _WIN32
+        ReadFile(read_handle, buffer, sizeof(buffer), &bytesRead, NULL);
+    #else
+        read(read_fd, buffer, sizeof(buffer));
+    #endif
+    printf("Server sent: %s\n", buffer);
 
    // Closing Pipes/Handles
    #ifdef _WIN32

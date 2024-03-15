@@ -18,4 +18,4 @@ jobs:
     - name: runServer
       run: cd pipe && ./server.out &
     - name: runClient
-      run: cd pipe && ./client.out
+      run: cd pipe && ./client.out &

@@ -14,8 +14,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: make
-    - run: cd pipe && make
+      run: cd pipe && make
     - name: runServer
-    - run: ./server &
+      run: ./server &
     - name: runClient
-    - run: ./client
+      run: ./client

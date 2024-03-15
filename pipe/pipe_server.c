@@ -20,7 +20,7 @@ int main() {
     char buffer[1024];
 
     #ifdef _WIN32
-        int bytesRead, bytesWritten;
+        DWORD bytesRead, bytesWritten;
         HANDLE read_handle, write_handle;
 
         // Create the named pipes
@@ -35,7 +35,7 @@ int main() {
             NULL                   // Default security attributes
         );
         if (read_handle == INVALID_HANDLE_VALUE) {
-            _tprintf(_T("Error creating inbound pipe: %d\n"), GetLastError());
+            _tprintf(_T("Error creating inbound pipe: %ld\n"), GetLastError());
             return 1;
         }
 
@@ -50,7 +50,7 @@ int main() {
             NULL 
         );
         if (write_handle == INVALID_HANDLE_VALUE) {
-            _tprintf(_T("Error creating outbound pipe: %d\n"), GetLastError());
+            _tprintf(_T("Error creating outbound pipe: %ld\n"), GetLastError());
             CloseHandle(read_handle);
             return 1;
         }
@@ -58,7 +58,7 @@ int main() {
         // Connect to the inbound pipe (client-to-server)
         BOOL connected = ConnectNamedPipe(read_handle, NULL);
         if (!connected) {
-            _tprintf(_T("Error connecting to inbound pipe: %d\n"), GetLastError());
+            _tprintf(_T("Error connecting to inbound pipe: %ld\n"), GetLastError());
             CloseHandle(read_handle);
             CloseHandle(write_handle);
             return 1;
@@ -67,7 +67,7 @@ int main() {
         // Connect to the outbound pipe (server-to-client)
         connected = ConnectNamedPipe(write_handle, NULL);
         if (!connected) {
-            _tprintf(_T("Error connecting to outbound pipe: %d\n"), GetLastError());
+            _tprintf(_T("Error connecting to outbound pipe: %ld\n"), GetLastError());
             CloseHandle(read_handle);
             CloseHandle(write_handle);
             return 1;

@@ -20,7 +20,7 @@ int main() {
     char buffer[1024];
 
     #ifdef _WIN32
-        int bytesRead, bytesWritten;
+        DWORD bytesRead, bytesWritten;
         HANDLE read_handle, write_handle;
     #else
         int read_fd, write_fd;

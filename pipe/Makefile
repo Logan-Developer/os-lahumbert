@@ -7,10 +7,10 @@ endif
 all: server.out client.out 
 
 server.out: pipe_server.c
-    gcc $(CFLAGS) -o server.out pipe_server.c $(LDLIBS)
+	gcc $(CFLAGS) -o server.out pipe_server.c $(LDLIBS)
 
 client.out: pipe_client.c
-    gcc $(CFLAGS) -o client.out pipe_client.c $(LDLIBS)
+	gcc $(CFLAGS) -o client.out pipe_client.c $(LDLIBS)
 
 clean:
-    rm -f server.out client.out client_to_server.pipe server_to_client.pipe
+	rm -f server.out client.out client_to_server.pipe server_to_client.pipe

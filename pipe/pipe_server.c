@@ -18,9 +18,9 @@
 
 int main() {
     char buffer[1024];
-    int bytesRead, bytesWritten; // Use appropriate types based on the OS
 
     #ifdef _WIN32
+        int bytesRead, bytesWritten;
         HANDLE read_handle, write_handle;
 
         // Create the named pipes
@@ -97,7 +97,7 @@ int main() {
     #ifdef _WIN32
         ReadFile(read_handle, buffer, sizeof(buffer), &bytesRead, NULL);
     #else
-        bytesRead = read(read_fd, buffer, sizeof(buffer)); 
+        read(read_fd, buffer, sizeof(buffer)); 
     #endif
     printf("Client sent: %s\n", buffer);
 

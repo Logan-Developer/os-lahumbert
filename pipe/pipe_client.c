@@ -28,7 +28,37 @@ int main() {
 
     // Pipe Creation (Conditional)
     #ifdef _WIN32 
-        // ... (Windows named pipe creation code)
+        // Create the named pipes
+        read_handle = CreateNamedPipe(
+            PIPE1,                 // Pipe name
+            PIPE_ACCESS_INBOUND,   // Read access
+            PIPE_TYPE_MESSAGE,     // Message-type pipe
+            1,                     // Only one instance
+            1024,                  // Outbound buffer size
+            1024,                  // Inbound buffer size 
+            0,                     // Default timeout
+            NULL                   // Default security attributes
+        );
+        if (read_handle == INVALID_HANDLE_VALUE) {
+            _tprintf(_T("Error creating inbound pipe: %ld\n"), GetLastError());
+            return 1;
+        }
+
+        write_handle = CreateNamedPipe(
+            PIPE2,
+            PIPE_ACCESS_OUTBOUND, 
+            PIPE_TYPE_MESSAGE,
+            1, 
+            1024, 
+            1024, 
+            0,
+            NULL 
+        );
+        if (write_handle == INVALID_HANDLE_VALUE) {
+            _tprintf(_T("Error creating outbound pipe: %ld\n"), GetLastError());
+            CloseHandle(read_handle);
+            return 1;
+        }
     #else
         mkfifo(FIFO1, 0666);
         mkfifo(FIFO2, 0666);

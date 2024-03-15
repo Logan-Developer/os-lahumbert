@@ -16,6 +16,6 @@ jobs:
     - name: make
       run: cd pipe && make
     - name: runServer
-      run: ./server &
+      run: ./server.out &
     - name: runClient
-      run: ./client
+      run: ./client.out

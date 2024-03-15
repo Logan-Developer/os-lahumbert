@@ -70,7 +70,7 @@ int main()
 // Pipe Opening/Connecting
 #ifdef _WIN32
     // Connect to the outbound pipe (server-to-client)
-    connected = ConnectNamedPipe(write_handle, NULL);
+    BOOL connected = ConnectNamedPipe(write_handle, NULL);
     if (!connected)
     {
         _tprintf(_T("Error connecting to outbound pipe: %ld\n"), GetLastError());
@@ -79,7 +79,7 @@ int main()
         return 1;
     }
     // Connect to the inbound pipe (client-to-server)
-    BOOL connected = ConnectNamedPipe(read_handle, NULL);
+    connected = ConnectNamedPipe(read_handle, NULL);
     if (!connected)
     {
         _tprintf(_T("Error connecting to inbound pipe: %ld\n"), GetLastError());

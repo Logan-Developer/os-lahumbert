@@ -17,3 +17,10 @@ It has been designed to work on both Windows and Unix systems.
     ```bash
     ./pipe_client
     ```
+
+## Screenshots
+Execution of the server and client on Windows and Linux systems respectively.
+
+![Execution on Windows](screenshots/pipe_execution_windows.png)
+
+![Execution on Linux](screenshots/pipe_execution_linux.png)

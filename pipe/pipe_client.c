@@ -30,7 +30,7 @@ int main()
 // Pipe Creation (Conditional)
 #ifdef _WIN32
     // Create the named pipe
-    hPipe = CreateFile( 
+    hpipe = CreateFile( 
          TEXT("\\\\.\\pipe\\pipe1"), // Pipe name
          GENERIC_READ |  // read and write access 
          GENERIC_WRITE, 

@@ -25,7 +25,7 @@ int main() {
 
         // Create the named pipes
         read_handle = CreateNamedPipe(
-            PIPE1,                 // Pipe name
+            TEXT(PIPE1),          // Pipe name
             PIPE_ACCESS_INBOUND,   // Read access
             PIPE_TYPE_MESSAGE,     // Message-type pipe
             1,                     // Only one instance
@@ -40,7 +40,7 @@ int main() {
         }
 
         write_handle = CreateNamedPipe(
-            PIPE2,
+            TEXT(PIPE2),
             PIPE_ACCESS_OUTBOUND, 
             PIPE_TYPE_MESSAGE,
             1, 

@@ -31,7 +31,7 @@ int main()
 #ifdef _WIN32
     // Create the named pipes
     write_handle = CreateNamedPipe(
-        PIPE1,                // Pipe name
+        TEXT(PIPE1),         // Pipe name
         PIPE_ACCESS_OUTBOUND, // Write access
         PIPE_TYPE_MESSAGE,    // Message-type pipe
         1,                    // Only one instance
@@ -48,7 +48,7 @@ int main()
     }
 
     read_handle = CreateNamedPipe(
-        PIPE2,
+        TEXT(PIPE2),
         PIPE_ACCESS_INBOUND,
         PIPE_TYPE_MESSAGE,
         1,

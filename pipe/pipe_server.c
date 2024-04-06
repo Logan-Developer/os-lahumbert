@@ -27,6 +27,9 @@ int main() {
         hpipe = CreateNamedPipe(
             TEXT("\\\\.\\pipe\\pipe1"), // Pipe name
             PIPE_ACCESS_DUPLEX,     // Read/write access
+            PIPE_TYPE_MESSAGE |     // Message type pipe
+            PIPE_READMODE_MESSAGE | // Message-read mode
+            PIPE_WAIT,              // Blocking mode
             PIPE_UNLIMITED_INSTANCES, // Unlimited instances
             1024,                  // Outbound buffer size
             1024,                  // Inbound buffer size 

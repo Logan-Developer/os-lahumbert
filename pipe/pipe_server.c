@@ -37,7 +37,7 @@ int main() {
             NULL                   // Default security attributes
         );
         if (hpipe == INVALID_HANDLE_VALUE) {
-            printf("Error creating pipe: %ld\n", GetLastError());
+            printf("Error creating pipe: %d\n", GetLastError());
             return 1;
         }
 

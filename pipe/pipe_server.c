@@ -21,55 +21,28 @@ int main() {
 
     #ifdef _WIN32
         DWORD bytesRead, bytesWritten;
-        HANDLE read_handle, write_handle;
+        HANDLE hpipe = INVALID_HANDLE_VALUE;
 
         // Create the named pipes
-        read_handle = CreateNamedPipe(
-            TEXT(PIPE1),          // Pipe name
-            PIPE_ACCESS_INBOUND,   // Read access
-            PIPE_TYPE_MESSAGE,     // Message-type pipe
-            5,                     // Five instance max
+        hpipe = CreateNamedPipe(
+            TEXT("\\\\.\\pipe\\pipe1"), // Pipe name
+            PIPE_ACCESS_DUPLEX,     // Read/write access
+            PIPE_UNLIMITED_INSTANCES, // Unlimited instances
             1024,                  // Outbound buffer size
             1024,                  // Inbound buffer size 
             0,                     // Default timeout
             NULL                   // Default security attributes
         );
-        if (read_handle == INVALID_HANDLE_VALUE) {
-            printf("Error creating inbound pipe: %ld\n", GetLastError());
+        if (hpipe == INVALID_HANDLE_VALUE) {
+            printf("Error creating pipe: %ld\n", GetLastError());
             return 1;
         }
 
-        write_handle = CreateNamedPipe(
-            TEXT(PIPE2),
-            PIPE_ACCESS_OUTBOUND, 
-            PIPE_TYPE_MESSAGE,
-            5,
-            1024, 
-            1024, 
-            0,
-            NULL 
-        );
-        if (write_handle == INVALID_HANDLE_VALUE) {
-            printf("Error creating outbound pipe: %ld\n", GetLastError());
-            CloseHandle(read_handle);
-            return 1;
-        }
-
-        // Connect to the inbound pipe (client-to-server)
-        BOOL connected = ConnectNamedPipe(read_handle, NULL);
+        // Connect to the pipe
+        BOOL connected = ConnectNamedPipe(hpipe, NULL) ? TRUE : (GetLastError() == ERROR_PIPE_CONNECTED);
         if (!connected) {
-            printf("Error connecting to inbound pipe: %ld\n", GetLastError());
-            CloseHandle(read_handle);
-            CloseHandle(write_handle);
-            return 1;
-        }
-
-        // Connect to the outbound pipe (server-to-client)
-        connected = ConnectNamedPipe(write_handle, NULL);
-        if (!connected) {
-            printf("Error connecting to outbound pipe: %ld\n", GetLastError());
-            CloseHandle(read_handle);
-            CloseHandle(write_handle);
+            printf("Error connecting to pipe: %ld\n", GetLastError());
+            CloseHandle(hpipe);
             return 1;
         }
 
@@ -88,14 +61,14 @@ int main() {
     // Communication Logic (Keep this mostly platform-independent)
     char *helloMsg = "Hello, I am the server!, who are you?";
     #ifdef _WIN32
-        WriteFile(write_handle, helloMsg, strlen(helloMsg) + 1, &bytesWritten, NULL);
+        WriteFile(hpipe, helloMsg, strlen(helloMsg) + 1, &bytesWritten, NULL);
     #else
         write(write_fd, helloMsg, strlen(helloMsg) + 1);
     #endif
     printf("Server sent: %s\n", helloMsg);
 
     #ifdef _WIN32
-        ReadFile(read_handle, buffer, sizeof(buffer), &bytesRead, NULL);
+        ReadFile(hpipe, buffer, sizeof(buffer), &bytesRead, NULL);
     #else
         read(read_fd, buffer, sizeof(buffer)); 
     #endif
@@ -103,7 +76,7 @@ int main() {
 
     char *response = "Hello, I am the server, nice to meet you!";
     #ifdef _WIN32
-        WriteFile(write_handle, response, strlen(response) + 1, &bytesWritten, NULL);
+        WriteFile(hpipe, response, strlen(response) + 1, &bytesWritten, NULL);
     #else
         write(write_fd, response, strlen(response) + 1);
     #endif
@@ -111,8 +84,7 @@ int main() {
 
    // Closing Pipes/Handles
    #ifdef _WIN32
-        CloseHandle(read_handle);
-        CloseHandle(write_handle);
+        CloseHandle(hpipe);
    #else
         close(read_fd);
         close(write_fd);

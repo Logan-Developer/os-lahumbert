@@ -42,7 +42,7 @@ int main()
 
     if (hpipe == INVALID_HANDLE_VALUE)
     {
-        printf("Error creating pipe: %ld\n", GetLastError());
+        printf("Error creating pipe: %d\n", GetLastError());
         CloseHandle(hpipe);
         return 1;
     }

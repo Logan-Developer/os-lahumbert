@@ -44,7 +44,7 @@ int main() {
         // Connect to the pipe
         BOOL connected = ConnectNamedPipe(hpipe, NULL) ? TRUE : (GetLastError() == ERROR_PIPE_CONNECTED);
         if (!connected) {
-            printf("Error connecting to pipe: %ld\n", GetLastError());
+            printf("Error connecting to pipe: %d\n", GetLastError());
             CloseHandle(hpipe);
             return 1;
         }

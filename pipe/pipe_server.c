@@ -28,7 +28,7 @@ int main() {
             TEXT(PIPE1),          // Pipe name
             PIPE_ACCESS_INBOUND,   // Read access
             PIPE_TYPE_MESSAGE,     // Message-type pipe
-            1,                     // Only one instance
+            5,                     // Five instance max
             1024,                  // Outbound buffer size
             1024,                  // Inbound buffer size 
             0,                     // Default timeout
@@ -43,7 +43,7 @@ int main() {
             TEXT(PIPE2),
             PIPE_ACCESS_OUTBOUND, 
             PIPE_TYPE_MESSAGE,
-            1, 
+            5,
             1024, 
             1024, 
             0,

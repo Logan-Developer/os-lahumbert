@@ -42,7 +42,7 @@ int main()
     );
     if (write_handle == INVALID_HANDLE_VALUE)
     {
-        _tprintf(_T("Error creating outbound pipe: %ld\n"), GetLastError());
+        printf("Error creating outbound pipe: %ld\n", GetLastError());
         CloseHandle(write_handle);
         return 1;
     }
@@ -58,7 +58,7 @@ int main()
         NULL);
     if (read_handle == INVALID_HANDLE_VALUE)
     {
-        _tprintf(_T("Error creating inbound pipe: %ld\n"), GetLastError());
+        printf("Error creating inbound pipe: %ld\n", GetLastError());
         CloseHandle(read_handle);
         return 1;
     }
@@ -73,7 +73,7 @@ int main()
     BOOL connected = ConnectNamedPipe(write_handle, NULL);
     if (!connected)
     {
-        _tprintf(_T("Error connecting to outbound pipe: %ld\n"), GetLastError());
+        printf("Error connecting to outbound pipe: %ld\n", GetLastError());
         CloseHandle(read_handle);
         CloseHandle(write_handle);
         return 1;
@@ -82,7 +82,7 @@ int main()
     connected = ConnectNamedPipe(read_handle, NULL);
     if (!connected)
     {
-        _tprintf(_T("Error connecting to inbound pipe: %ld\n"), GetLastError());
+        printf("Error connecting to inbound pipe: %ld\n", GetLastError());
         CloseHandle(read_handle);
         CloseHandle(write_handle);
         return 1;

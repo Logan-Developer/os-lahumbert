@@ -35,7 +35,7 @@ int main() {
             NULL                   // Default security attributes
         );
         if (read_handle == INVALID_HANDLE_VALUE) {
-            _tprintf(_T("Error creating inbound pipe: %ld\n"), GetLastError());
+            printf("Error creating inbound pipe: %ld\n", GetLastError());
             return 1;
         }
 
@@ -50,7 +50,7 @@ int main() {
             NULL 
         );
         if (write_handle == INVALID_HANDLE_VALUE) {
-            _tprintf(_T("Error creating outbound pipe: %ld\n"), GetLastError());
+            printf("Error creating outbound pipe: %ld\n", GetLastError());
             CloseHandle(read_handle);
             return 1;
         }
@@ -58,7 +58,7 @@ int main() {
         // Connect to the inbound pipe (client-to-server)
         BOOL connected = ConnectNamedPipe(read_handle, NULL);
         if (!connected) {
-            _tprintf(_T("Error connecting to inbound pipe: %ld\n"), GetLastError());
+            printf("Error connecting to inbound pipe: %ld\n", GetLastError());
             CloseHandle(read_handle);
             CloseHandle(write_handle);
             return 1;
@@ -67,7 +67,7 @@ int main() {
         // Connect to the outbound pipe (server-to-client)
         connected = ConnectNamedPipe(write_handle, NULL);
         if (!connected) {
-            _tprintf(_T("Error connecting to outbound pipe: %ld\n"), GetLastError());
+            printf("Error connecting to outbound pipe: %ld\n", GetLastError());
             CloseHandle(read_handle);
             CloseHandle(write_handle);
             return 1;

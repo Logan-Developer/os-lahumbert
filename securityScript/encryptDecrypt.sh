@@ -49,6 +49,7 @@ if [ -z "$OUTPUT_FILE" ]; then
         OUTPUT_FILE="$1.enc"
     else
         OUTPUT_FILE="$1.dec"
+    fi
 fi
 
 
@@ -79,3 +80,5 @@ else
     echo "Decrypting $1"
     openssl rsautl -decrypt -inkey $PRIVATE_KEY -in $1 -out $OUTPUT_FILE
 fi
+
+echo "Done"

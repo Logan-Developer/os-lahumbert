@@ -10,7 +10,7 @@
 \subtitle{CSCI 425 - Operating Systems Design}
 \author{Logan Humbert}
 \institute{Colorado Mesa University}
-\date{May 15, 2024}
+\date{May 6, 2024}
 \titlegraphic{\includegraphics[width=2cm]{cmu_logo}}
 
 \begin{document}
@@ -26,9 +26,12 @@
 		\frametitle{Introduction}
 		
 		\begin{alertblock}{What is RISC-V}
-			Instruction set architecture
-			\linebreak
-			Unlike x86, ARM RISC-V is open-source
+			\begin{itemize}
+				\item Open-source instruction set architecture (ISA)
+				\item Focused on simplicity and efficiency, unlike complex x86 and ARM
+				\item RISC stands for Reduced Instruction Set Computer
+				\item Opposed to CISC (Complex Instruction Set Computer)
+			\end{itemize}
 		\end{alertblock}
 	\end{frame}
 	
@@ -38,7 +41,7 @@
 		
 		\begin{alertblock}{Early 2010s}
 			\begin{itemize}
-				\item RISC-V project born
+				\item RISC-V project born at UC Berkeley
 				\item Built on decades of RISC research (RISC-I and II in 1981)
 			\end{itemize}
 		\end{alertblock}
@@ -57,28 +60,45 @@
 	\end{frame}
 	
 	\section{Design}
+	\subsection{Simplicity}
 	\begin{frame}
 		\frametitle{Design}
+		\framesubtitle{Simplicity}
 		
-		\begin{alertblock}{Simplicity}
+		\begin{alertblock}{Characteristics}
 			\begin{itemize}
-				\item Small, well-defined instruction set
-				\item Emphasis on clear instruction encoding
+				\item \textbf{Small Instruction Set:} RISC-V uses a limited, well-defined set of instructions
+				
+				\item \textbf{Fixed Instruction Length:} Instructions are the same size, making decoding faster and hardware simpler
+				
+				\item \textbf{Load/Store Architecture:}  Dedicated instructions for memory operations improve efficiency
+			\end{itemize}
+		\end{alertblock}
+	\end{frame}
+	
+	\subsection{Modularity}
+	\begin{frame}
+		\frametitle{Design}
+		\framesubtitle{Modularity}
+		
+		\begin{alertblock}{Characteristics}
+			\begin{itemize}
+				\item \textbf{Base ISA:}  RISC-V defines a core set of essential instructions
+				
+				\item \textbf{Standard Extensions:}  Provide commonly needed functionality (e.g., floating-point, compressed instructions)
+				
+				\item \textbf{Custom Extensions:}  Users can design their own extensions for specialized tasks
 			\end{itemize}
 		\end{alertblock}
 		
-		\begin{alertblock}{Modularity}
-			\begin{itemize}
-				\item Base ISA
-				\item Optional extensions
-			\end{itemize}
-		\end{alertblock}
-		
-			\begin{alertblock}{Load/Store architecture}
-			\begin{itemize}
-				\item Memory operations restricted to dedicated load/store instructions
-				\item Simplifies the pipeline and improve efficiency
-			\end{itemize}
+		\begin{alertblock}{Benefits}
+		\begin{itemize}
+			\item  Devices only use the instructions they need, reducing chip power and complexity
+			
+			\item  Enables innovation and tailoring ISAs for specific application areas
+			
+			\item  Promotes a collaborative ecosystem around RISC-V development
+		\end{itemize}
 		\end{alertblock}
 	\end{frame}
 	
@@ -108,7 +128,7 @@
 		\end{alertblock}
 		
 		\begin{alertblock}{Aerospace and Government}
-				Meets High reliability and security requirements
+				Meets High reliability, security requirements + resilience to radiation
 		\end{alertblock}
 	\end{frame}
 	
@@ -116,14 +136,11 @@
 	\begin{frame}
 		\frametitle{Conclusion}
 		
-		\begin{alertblock}{Objectives fulfilled?}
-			Requirements correctly integrated in final product
-		\end{alertblock}
-		
-		\begin{alertblock}{How to improve the app?}
+		\begin{alertblock}{Recap}
 			\begin{itemize}
-				\item Be able to download folders as zip
-				\item Administrator mode to manage user access
+				\item Open-source architecture accelerates innovation and collaboration.
+				\item Simplicity and modularity lead to efficiency and tailored solutions.
+				\item Wide range of applications, with potential to disrupt traditional markets.
 			\end{itemize}
 		\end{alertblock}
 	\end{frame}

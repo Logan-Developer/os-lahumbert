@@ -6,7 +6,7 @@
 \usepackage{graphicx}
 \graphicspath{ {./images/} }
 
-\title{Architecture RISC-V}
+\title{RISC-V architecture}
 \subtitle{CSCI 425 - Operating Systems Design}
 \author{Logan Humbert}
 \institute{Colorado Mesa University}
@@ -29,7 +29,12 @@
 			\begin{itemize}
 				\item Open-source instruction set architecture (ISA)
 				\item Focused on simplicity and efficiency, unlike complex x86 and ARM
-				\item RISC stands for Reduced Instruction Set Computer
+			\end{itemize}
+		\end{alertblock}
+		
+		\begin{alertblock}{RISC ?}
+			\begin{itemize}
+				\item RISC: Reduced Instruction Set Computer
 				\item Opposed to CISC (Complex Instruction Set Computer)
 			\end{itemize}
 		\end{alertblock}
@@ -67,9 +72,9 @@
 		
 		\begin{alertblock}{Characteristics}
 			\begin{itemize}
-				\item \textbf{Small Instruction Set:} RISC-V uses a limited, well-defined set of instructions
+				\item \textbf{Small Instruction Set}: Limited, well-defined set of instructions
 				
-				\item \textbf{Fixed Instruction Length:} Instructions are the same size, making decoding faster and hardware simpler
+				\item \textbf{Fixed Instruction Length:} Makes decoding faster and hardware simpler
 				
 				\item \textbf{Load/Store Architecture:}  Dedicated instructions for memory operations improve efficiency
 			\end{itemize}
@@ -83,11 +88,11 @@
 		
 		\begin{alertblock}{Characteristics}
 			\begin{itemize}
-				\item \textbf{Base ISA:}  RISC-V defines a core set of essential instructions
+				\item \textbf{Base ISA:} Core set of essential instructions
 				
-				\item \textbf{Standard Extensions:}  Provide commonly needed functionality (e.g., floating-point, compressed instructions)
+				\item \textbf{Standard Extensions:} Floating-point, compressed instructions, ...
 				
-				\item \textbf{Custom Extensions:}  Users can design their own extensions for specialized tasks
+				\item \textbf{Custom Extensions:} Design custom extensions for specialized tasks
 			\end{itemize}
 		\end{alertblock}
 		
@@ -102,7 +107,50 @@
 		\end{alertblock}
 	\end{frame}
 	
-		\section{Applications}
+	\subsection{Trade-offs and Challenges}
+	\begin{frame}
+		\frametitle{Design}
+		\framesubtitle{Trade-offs and Challenges 1/2}
+		
+		\begin{alertblock}{Software Ecosystem}
+			\begin{itemize}
+				\item Limited software ecosystem compared to x86 and ARM
+				
+				\item Porting some software needed: development overhead
+			\end{itemize}
+		\end{alertblock}
+		
+		\begin{alertblock}{Industry Adoption}
+			\begin{itemize}
+				\item Growing adoption, but less ubiquitous than x86 and ARM
+				
+				\item Finding experienced RISC-V developers might be harder
+			\end{itemize}
+		\end{alertblock}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Design}
+		\framesubtitle{Trade-offs and Challenges 2/2}
+		
+		\begin{alertblock}{Instruction Complexity}
+			\begin{itemize}
+				\item Complex tasks may need longer instruction sequences (no specialized instructions)
+				
+				\item Potential performance impact in some cases
+			\end{itemize}
+		\end{alertblock}
+		
+		\begin{alertblock}{Fragmentation}
+			\begin{itemize}
+				\item Openness could lead to some fragmentation (Various implementations)
+				
+				\item Extra care needed for software compatibility
+			\end{itemize}
+		\end{alertblock}
+	\end{frame}
+	
+	\section{Applications}
 	\begin{frame}
 		\frametitle{Applications}
 		
@@ -138,9 +186,10 @@
 		
 		\begin{alertblock}{Recap}
 			\begin{itemize}
-				\item Open-source architecture accelerates innovation and collaboration.
-				\item Simplicity and modularity lead to efficiency and tailored solutions.
-				\item Wide range of applications, with potential to disrupt traditional markets.
+				\item Open-source architecture accelerates innovation and collaboration
+				\item Simplicity and modularity lead to efficiency and tailored solutions
+				\item Wide range of applications, with potential to disrupt traditional markets
+				\item Has some trade-offs compared to CISC architecture
 			\end{itemize}
 		\end{alertblock}
 	\end{frame}

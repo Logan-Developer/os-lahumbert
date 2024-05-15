@@ -1,0 +1,9 @@
+// Level 2 ladder donotrendersprite donotrendercollision
+Sprite      background1         "gfx/background2.png"       1920        1080
+Ground      ground              "gfx/ground1.png"           805         131         0           949
+Ground      ground2             "gfx/ground2.png"           650         131         1270        949
+Ground      ladder              "gfx/bridge_ladder.png"     466         131         806         949
+ladder      true                true
+Player      player              130      253         300         944
+Enemy       enemy               3        130         253         1700
+Key         key                 ladder      bridge      "gfx/red_button.png"    20       20       111         734

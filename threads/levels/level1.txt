@@ -1,0 +1,7 @@
+// Level 1
+Sprite      background      "gfx/background1.png"           1920    1080
+Ground      ground          "gfx/background1_ground.png"    909     132      1011      948
+Ground      sub             "gfx/clear.png"                 403     250      0         639
+Ground      sub2            "gfx/clear.png"                 483     150      403       833
+Ground      water           "gfx/clear.png"                 200     150      800       900
+Player      player          130     253      200     400
